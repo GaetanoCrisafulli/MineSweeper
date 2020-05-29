@@ -15,11 +15,14 @@ public class Board {
         while(this.bombsNumber != 0){
             for (int i = 0; i < grid.length; i++) {
                 for (int j = 0; j < grid[0].length; j++) {
-                    if(this.bombsNumber != 0){
+                    if(this.grid[i][j] == null || !this.grid[i][j].getName().equalsIgnoreCase("bomb")){
                         value = Math.random();
                         if(value < 0.10){
                             this.grid[i][j] = new Cell("bomb", "\uD83D\uDCA3");
                             this.bombsNumber--;
+                            if(this.bombsNumber == 0){
+                                return;
+                            }
                         }
                     }
                 }
@@ -188,7 +191,7 @@ public class Board {
                 count = 0;
             }
         }
-    }
+}
 
     public boolean isABomb(int row, int column){
         if(this.grid[row][column].getName().equalsIgnoreCase("bomb")){
